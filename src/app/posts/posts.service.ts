@@ -4,16 +4,17 @@ import { map } from 'rxjs/operators';
 
 import { Post } from './posts.model';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class PostsService {
   private posts: Post[] = [];
   private postsUpdated = new Subject<Post[]>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getPost(postId: string) {
-    return {...this.posts.find(p => postId === p.id)};
+    return this.http.get<{_id: string, title: string, content: string}>("http://localhost:3000/api/posts/" + postId);
   }
 
   getPosts() {
@@ -48,13 +49,17 @@ export class PostsService {
       post.id = postId;
       this.posts.push(post);
       this.postsUpdated.next([...this.posts]);
+      this.router.navigate(["/"]);
     });
   }
 
-  updatePost(postId: string, post: Post) {
-    this.http.put("http://localhost:3000/api/posts/" + postId, post)
+  updatePost(post: Post) {
+    this.http.put("http://localhost:3000/api/posts/" + post.id, post)
     .subscribe((response) => {
-      console.log(response);
+      // console.log(response);
+      this.posts = this.posts.map(p => p.id === post.id ? post : p);
+      this.postsUpdated.next([...this.posts]);
+      this.router.navigate(["/"]);
     })
   }
 

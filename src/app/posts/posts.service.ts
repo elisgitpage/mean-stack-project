@@ -12,6 +12,10 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
+  getPost(postId: string) {
+    return {...this.posts.find(p => postId === p.id)};
+  }
+
   getPosts() {
     this.http
       .get<{ message: string; posts: any }>(
@@ -45,6 +49,13 @@ export class PostsService {
       this.posts.push(post);
       this.postsUpdated.next([...this.posts]);
     });
+  }
+
+  updatePost(postId: string, post: Post) {
+    this.http.put("http://localhost:3000/api/posts/" + postId, post)
+    .subscribe((response) => {
+      console.log(response);
+    })
   }
 
   deletePost(postId: string) {

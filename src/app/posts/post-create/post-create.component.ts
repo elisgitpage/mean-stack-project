@@ -62,13 +62,14 @@ export class PostCreateComponent implements OnInit {
   }
 
   onSavePost (): void {
-    if (this.form.invalid) {
-      return
-    }
+    // if (this.form.invalid) {
+    //   return
+    // }
 
     const post: Post = {
       title: this.form.value.title,
-      content: this.form.value.content
+      content: this.form.value.content,
+      image: this.form.value.image
     }
 
     this.isLoading = true

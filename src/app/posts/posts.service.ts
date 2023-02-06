@@ -42,7 +42,13 @@ export class PostsService {
   }
 
   addPost(post: Post) {
-    this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
+    const postData = new FormData();
+    postData.append("title", post.title);
+    postData.append("content", post.content);
+    postData.append("image", post.image, post.title);
+
+
+    this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', postData)
     .subscribe((responseData) => {
       console.log("new postId:" + responseData.postId);
       const postId = responseData.postId;

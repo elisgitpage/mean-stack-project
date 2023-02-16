@@ -26,7 +26,7 @@
       <input type="file" #filePicker (change)="onImagePicked($event)">
     </div>
     <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview && form.get('image').valid">
-      <img [src]="imagePreview" [alt]="form.value.title">
+      <img [src]="this.imagePreview" [alt]="form.value.title">
     </div>
     <button mat-raised-button color="primary" type="submit">Save Post</button>
   </form>

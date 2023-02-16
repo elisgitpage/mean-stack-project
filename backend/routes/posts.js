@@ -72,9 +72,9 @@ router.put(
   "/:id",
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
-    console.log(req.post.file);
+    console.log(req);
     let image = req.body.image;
-    if (req.post.file) {
+    if (req.file) {
       const url = req.protocol + "://" + req.get("host");
       image = url + "/images/" + req.file.filename;
     }

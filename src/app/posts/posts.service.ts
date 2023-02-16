@@ -64,6 +64,7 @@ export class PostsService {
     let postData;
     if(typeof(post.image) === 'object') {
       postData = new FormData();
+      postData.append("id", post.id)
       postData.append("content", post.content);
       postData.append("title", post.title);
       postData.append("image", post.image, post.title);

@@ -40,5 +40,8 @@ app.use((req, res, next) => {
 
 app.use("/api/posts", postsRoutes);
 app.use("/api/user", userRoutes);
+app.listen(3001, () => {
+  console.log("Server listening on Port 4001.");
+});
 
 module.exports = app;

@@ -13,9 +13,11 @@ export class LoginComponent {
 
   onLogin(form: NgForm) {
     if (form.invalid) {
+      console.log("login form invalid");
       return;
     }
     this.authService.loginUser(form.value.email, form.value.password);
+
   }
 
 }

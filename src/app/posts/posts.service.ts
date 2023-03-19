@@ -14,7 +14,7 @@ export class PostsService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getPost(postId: string) {
-    return this.http.get<{_id: string, title: string, content: string, image: string}>("http://localhost:3000/api/posts/" + postId);
+    return this.http.get<{_id: string, title: string, content: string, image: string, creator: string}>("http://localhost:3000/api/posts/" + postId);
   }
 
   getPosts(postsPerPage: number, currentPage: number) {
@@ -30,13 +30,15 @@ export class PostsService {
             title: post.title,
             content: post.content,
             id: post._id,
-            image: post.image
+            image: post.image,
+            creator: post.creator
           };
         }),
         maxPosts: postData.maxPosts
       };
       }))
       .subscribe((updatedPostData) => {
+        console.log(updatedPostData);
         this.posts = updatedPostData.posts;
         this.postsUpdated.next({ posts: [...this.posts], postCount: updatedPostData.maxPosts});
       });
@@ -72,7 +74,8 @@ export class PostsService {
         id: post.id,
         title: post.title,
         content: post.content,
-        image: post.image
+        image: post.image,
+        creator: null
       }
     }
     this.http.put("http://localhost:3000/api/posts/" + post.id, postData)

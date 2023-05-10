@@ -81,7 +81,11 @@ export class PostsService {
     this.http.put("http://localhost:3000/api/posts/" + post.id, postData)
     .subscribe((response) => {
       this.router.navigate(["/"]);
-    })
+    },
+    () => {
+      this.router.navigate(["/"]);
+    }
+    )
   }
 
   deletePost(postId: string) {

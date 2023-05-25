@@ -8,7 +8,7 @@ const checkAuth = require("../middleware/check-auth");
 
 const extractFile = require("../middleware/file");
 
-router.post("", checkAuth, extractFile.fileWare, PostController.createPost);
+router.post("", checkAuth, extractFile, PostController.createPost);
 
 router.get("/:id", PostController.getPost);
 

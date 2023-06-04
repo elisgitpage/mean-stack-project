@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "ocH9ZgUzQY5mxkyT",
+    "JWT_KEY": "correct_horse_staple_battery"
+  }
+}
